@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Hello World</string>
+    <string name="x_orang">%1$d orang</string>
+    <string name="network_error">Network error</string>
+    <string name="belum_ada_data">Belum ada data</string>
+    <string name="jumlah_kasus_positif">Jumlah kasus positif per hari</string>
 </resources>
