@@ -1,8 +1,8 @@
 package org.d3if1071.helloworld
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -43,11 +43,6 @@ class MainActivity : AppCompatActivity() {
             //data dari list di adapter di set menjadi data dari view model
             adapter.setData(it)
         })
-        //untuk view model progress bar nya
-        viewModel.getStatus().observe(this, Observer {
-            //it adalah data dari view model
-            updateProgress(it)
-        })
 
         //char init
         with(chart) {
@@ -62,8 +57,27 @@ class MainActivity : AppCompatActivity() {
             legend.setDrawInside(false)
         }
 
-        //view model untuk char
-        viewModel.getEntries().observe(this, Observer { updateChart(it) })
+        //buat arraylist penampung data dari positif dan negatif
+        var listPositif :List<Entry> = arrayListOf()
+        var listNegatif :List<Entry> = arrayListOf()
+        //view model untuk char positif
+        viewModel.getEntries().observe(this, Observer {
+            listPositif=it
+        })
+        //view model untuk char negatif
+        viewModel.getEntriesSembuh().observe(this, Observer {
+            listNegatif=it
+        })
+
+        //untuk view model progress bar nya
+        viewModel.getStatus().observe(this, Observer {
+            //init data positif dan negatif chart
+            updateChart(listPositif,listNegatif)
+            //it adalah data dari view model
+            updateProgress(it) })
+
+
+
 
         //menuliskan date pada sumbu x
         val formatter = SimpleDateFormat("dd MMMM", Locale("ID", "id"))
@@ -88,16 +102,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     //method untuk update chart
-    private fun updateChart(entries: List<Entry>) {
+    private fun updateChart(entries: List<Entry>,entriesSembuh : List<Entry>) {
+        //init penampung 2 chart
+        val chartData = LineData()
+
         val dataset = LineDataSet(entries, getString(R.string.jumlah_kasus_positif))
         dataset.color = ContextCompat.getColor(this, R.color.colorPrimary)
         dataset.fillColor = dataset.color
         dataset.setDrawFilled(true)
         dataset.setDrawCircles(false)
 
-        chart.data = LineData(dataset)
+        chartData.addDataSet(dataset)
+
+        //challenge negatif : menambahkan chart untuk datasetNegatif / sembuh
+        val datasetSembuh = LineDataSet(entriesSembuh, getString(R.string.jumlah_kasus_negatif))
+        datasetSembuh.color = ContextCompat.getColor(this, R.color.colorAccent)
+        datasetSembuh.fillColor = datasetSembuh.color
+        datasetSembuh.setDrawFilled(true)
+        datasetSembuh.setDrawCircles(false)
+
+        chartData.addDataSet(datasetSembuh)
+        chart.data=chartData
+
+        chart.data=chartData
         chart.invalidate()
     }
+
+
+
 
 
     //system loading

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.list_item_main.view.*
 import org.d3if1071.helloworld.R
 import org.d3if1071.helloworld.models.Harian
 import java.text.SimpleDateFormat
@@ -22,10 +21,14 @@ class MainAdapter :RecyclerView.Adapter<MainAdapter.ViewHolder>(){
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val tanggalTextView = itemView.findViewById<TextView>(R.id.tanggal)
         private val positifTextView = itemView.findViewById<TextView>(R.id.jumlahPositif)
+        //challenge negatif : init negatif textview dari layout list_item_main.xml
+        private val sembuhTextView = itemView.findViewById<TextView>(R.id.tv_jumlahNegatif)
 
         fun bind(harian: Harian){
             tanggalTextView.text = formatter.format(Date((harian.key)))
             positifTextView.text = itemView.context.getString(R.string.x_orang,harian.jumlahPositif.value)
+        //  challenge negatif : menambahkan view list untuk negatif
+            sembuhTextView.text = itemView.context.getString(R.string.x_orang,harian.jumlahSembuh.value)
         }
     }
 

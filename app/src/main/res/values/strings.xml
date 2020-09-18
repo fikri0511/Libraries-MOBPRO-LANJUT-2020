@@ -4,4 +4,5 @@
     <string name="network_error">Network error</string>
     <string name="belum_ada_data">Belum ada data</string>
     <string name="jumlah_kasus_positif">Jumlah kasus positif per hari</string>
+    <string name="jumlah_kasus_negatif">Jumlah kasus negatif per hari</string>
 </resources>

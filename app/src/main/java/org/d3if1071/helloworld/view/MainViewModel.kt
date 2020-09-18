@@ -18,6 +18,7 @@ class MainViewModel : ViewModel() {
     private val data = MutableLiveData<List<Harian>>()
     private val status = MutableLiveData<ApiStatus>()
     private val entries = MutableLiveData<List<Entry>>()
+    private val entriesSembuh = MutableLiveData<List<Entry>>()
 
 
     //data status
@@ -27,6 +28,9 @@ class MainViewModel : ViewModel() {
 
     //method untuk getEntries
     fun getEntries(): LiveData<List<Entry>> = entries
+
+    //method untuk getEntriesSembuh
+    fun getEntriesSembuh(): LiveData<List<Entry>> = entriesSembuh
 
 
     init {
@@ -48,6 +52,18 @@ class MainViewModel : ViewModel() {
         return result
     }
 
+    // Challenge sembuh : data untuk dari list Harian masuk ke List untuk char sembuh
+    private fun getEntrySembuh(data: List<Harian>): List<Entry> {
+        val result = ArrayList<Entry>()
+        var index = 1f;
+        for (harian in data) {
+            result.add(Entry(index, harian.jumlahSembuh.value.toFloat()))
+            index += 1
+        }
+        return result
+    }
+
+
 
     //request data pake log
     private suspend fun requestData() {
@@ -63,11 +79,15 @@ class MainViewModel : ViewModel() {
             //entries data chart
             entries.postValue(getEntry(result.update.harian))
 
+            //entries data chart
+            entriesSembuh.postValue(getEntrySembuh(result.update.harian))
+
             status.postValue(ApiStatus.SUCCESS)
 
         } catch (e: Exception) {
             //terjadi jika ada masalah ketika pengambilan data
             status.postValue(ApiStatus.FAILED)
+            Log.d("REQUEST", e.message.toString())
 
         }
     }
