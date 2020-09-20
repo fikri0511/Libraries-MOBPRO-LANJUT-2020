@@ -28,7 +28,7 @@ class MainAdapter :RecyclerView.Adapter<MainAdapter.ViewHolder>(){
             tanggalTextView.text = formatter.format(Date((harian.key)))
             positifTextView.text = itemView.context.getString(R.string.x_orang,harian.jumlahPositif.value)
         //  challenge negatif : menambahkan view list untuk negatif
-            sembuhTextView.text = itemView.context.getString(R.string.x_orang,harian.jumlahSembuh.value)
+            sembuhTextView.text = itemView.context.getString(R.string.x_orang,harian.jumlah_sembuh.value)
         }
     }
 

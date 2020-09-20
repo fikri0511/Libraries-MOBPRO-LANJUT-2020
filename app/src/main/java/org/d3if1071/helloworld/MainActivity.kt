@@ -58,25 +58,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         //buat arraylist penampung data dari positif dan negatif
-        var listPositif :List<Entry> = arrayListOf()
-        var listNegatif :List<Entry> = arrayListOf()
+        var listPositif: List<Entry> = arrayListOf()
+        var listNegatif: List<Entry> = arrayListOf()
         //view model untuk char positif
         viewModel.getEntries().observe(this, Observer {
-            listPositif=it
+            listPositif = it
         })
         //view model untuk char negatif
         viewModel.getEntriesSembuh().observe(this, Observer {
-            listNegatif=it
+            listNegatif = it
         })
 
         //untuk view model progress bar nya
         viewModel.getStatus().observe(this, Observer {
             //init data positif dan negatif chart
-            updateChart(listPositif,listNegatif)
+            updateChart(listPositif, listNegatif)
             //it adalah data dari view model
-            updateProgress(it) })
-
-
+            updateProgress(it)
+        })
 
 
         //menuliskan date pada sumbu x
@@ -102,7 +101,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //method untuk update chart
-    private fun updateChart(entries: List<Entry>,entriesSembuh : List<Entry>) {
+    private fun updateChart(entries: List<Entry>, entriesSembuh: List<Entry>) {
         //init penampung 2 chart
         val chartData = LineData()
 
@@ -122,14 +121,9 @@ class MainActivity : AppCompatActivity() {
         datasetSembuh.setDrawCircles(false)
 
         chartData.addDataSet(datasetSembuh)
-        chart.data=chartData
-
-        chart.data=chartData
+        chart.data = chartData
         chart.invalidate()
     }
-
-
-
 
 
     //system loading

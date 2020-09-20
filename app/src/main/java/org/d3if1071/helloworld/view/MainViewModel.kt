@@ -57,12 +57,11 @@ class MainViewModel : ViewModel() {
         val result = ArrayList<Entry>()
         var index = 1f;
         for (harian in data) {
-            result.add(Entry(index, harian.jumlahSembuh.value.toFloat()))
+            result.add(Entry(index, harian.jumlah_sembuh.value.toFloat()))
             index += 1
         }
         return result
     }
-
 
 
     //request data pake log
