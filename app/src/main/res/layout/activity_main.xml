@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="18sp"
-            android:text="Tanggal"/>
+            android:text="@string/tanggal"/>
 
         <TextView
             android:id="@+id/jumlahPositif"
@@ -55,14 +55,14 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="14dp"
             android:textSize="18sp"
-            android:text="Positif" />
+            android:text="@string/positif" />
 
         <TextView
             android:id="@+id/tv_jumlahNegatif"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="Sembuh" />
+            android:text="@string/sembuh" />
     </LinearLayout>
 
     <View

@@ -5,4 +5,7 @@
     <string name="belum_ada_data">Belum ada data</string>
     <string name="jumlah_kasus_positif">Jumlah kasus positif per hari</string>
     <string name="jumlah_kasus_negatif">Jumlah kasus negatif per hari</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="positif">Positif</string>
+    <string name="sembuh">Sembuh</string>
 </resources>
